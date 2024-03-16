@@ -278,7 +278,7 @@ def monitor_model(
         mrm_monitor_details = wos_client.monitor_instances.create(
             data_mart_id=data_mart_id,
             background_mode=False,
-            monitor_definition_id=wos_client.monitor_definitions.MONITORS.MODEL_RISK_MANAGEMENT_MONITORING.ID,
+            monitor_definition_id=wos_client.monitor_definitions.MONITORS.MODEL_RISK_MANAGEMENT.ID,
             target=Target(
                 target_type=TargetTypes.SUBSCRIPTION, target_id=subscription_id
             ),
