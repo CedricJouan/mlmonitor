@@ -120,6 +120,7 @@ def init_external_fs_client(logger, **params) -> tuple:
             set_as_current_experiment=True,
         )
     elif params.get("cp4d_env") == "prem":
+        AIGovFactsClient.disable_ssl_verification = True
         facts_client = AIGovFactsClient(
             cloud_pak_for_data_configs=CloudPakforDataConfig(
                 service_url=params.get("cp4d_url"),
