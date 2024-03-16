@@ -73,7 +73,7 @@ def init_external_fs_client(logger, **params) -> tuple:
         SM_TRAINING_ENV = json.loads(os.environ["SM_TRAINING_ENV"])
         experiment_name = SM_TRAINING_ENV["job_name"]
         API_KEY = json.loads(
-            _get_secret(secret_name="IBM_KEYS_PERSO", region_name=region_name)
+            _get_secret(secret_name="IBM_KEYS_PREM", region_name=region_name)
         ).get(API_KEY_NAME)
         fs_tags = {
             "job_name": SM_TRAINING_ENV["job_name"],
