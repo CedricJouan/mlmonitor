@@ -324,7 +324,7 @@ class ModelUseCase(ABC):
         """
         pass
 
-    def monitor(self):
+    def monitor(self, provider_type: str = "pre_production"):
         """
         It takes an instance of a ModelConfig class for a deployed model (must be trained AND deployed in serving platform)
          and uses it to create a Watson OpenScale subscription with monitors
@@ -350,7 +350,6 @@ class ModelUseCase(ABC):
             )
             subscription_id = subscription_ids[0]
         else:
-            provider_type = "production"
             subscription_id = monitor_model(
                 model_config=self._model_config,
                 deployment_name=self.model_endpoint,

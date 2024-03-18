@@ -47,7 +47,7 @@ def monitor_model(
     :param model_config:ModelConfig: Sagemaker model config Object
     :param deployment_name:str: indicates Endpoint Name in Sagemaker for which an OpenScale subscription should be created
     :param deployment_target:str: target model serving environment (wml , aws , azure , custom)
-    :param wos_provider_type:str: type of Watson OpenScale ML service provider to create if it does not already exists. options are `production` or `pre_production
+    :param wos_provider_type:str: type of Watson OpenScale ML service provider to create if it does not already exists. options are `production` or `pre_production`
     :param wos_provider_name:str: indicates OpenScale ML service provider unique name to use (if exists and wos_provider_keep=True) or create (if does not exist and wos_provider_keep=False)
     :param wos_provider_description:str: indicates description to add to OpenScale ML service provider if created (does not exists yet and wos_provider_keep=False)
     :param wos_provider_keep:bool=True: flag indicates whether an existing OpenScale ML service provider with the same name should be reused or re-created
