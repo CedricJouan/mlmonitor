@@ -57,7 +57,7 @@ def init_external_fs_client(
         SM_TRAINING_ENV = json.loads(os.environ["SM_TRAINING_ENV"])
         experiment_name = SM_TRAINING_ENV["job_name"]
         API_KEY = json.loads(
-            get_secret(secret_name="IBM_KEYS", region_name=region_name)
+            get_secret(secret_name="IBM_KEYS_PREM", region_name=region_name)
         ).get(ibm_key_name)
 
         fs_tags = {

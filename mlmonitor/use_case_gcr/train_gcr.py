@@ -362,10 +362,8 @@ if __name__ == "__main__":
     # CP4D specific arguments
     parser.add_argument("--catalog-id", type=str)  # used by train_sagemaker_job,train_az_ml_job
     parser.add_argument("--model-entry-id", type=str)  # used by train_sagemaker_job,train_az_ml_job
-    parser.add_argument("--ibm-key-name", type=str,
-                        default="IBM_API_KEY_MLOPS")  # used by train_sagemaker_job,train_az_ml_job
-    parser.add_argument("--cp4d-env", type=str, default=os.getenv("ENV", "saas"),
-                        choices=["saas", "prem"], )  # used by train_sagemaker_job,train_az_ml_job
+    parser.add_argument("--ibm-key-name", type=str, default="IBM_API_KEY_MLOPS")  # used by train_sagemaker_job,train_az_ml_job
+    parser.add_argument("--cp4d-env", type=str, default=os.getenv("ENV", "saas"), choices=["saas", "prem"], )  # used by train_sagemaker_job,train_az_ml_job
     parser.add_argument("--cp4d-username", type=str, default=None)  # used by train_sagemaker_job,train_az_ml_job
     parser.add_argument("--cp4d-url", type=str, default=None)  # used by train_sagemaker_job,train_az_ml_job
     parser.add_argument("--model-name", type=str, default="gcr-model")
@@ -374,7 +372,7 @@ if __name__ == "__main__":
     parser.add_argument("--model-dir", type=str, default=os.getenv("SM_MODEL_DIR", "./outputs"))
     parser.add_argument("--output-data-dir", type=str, default=os.getenv("SM_OUTPUT_DATA_DIR", "./outputs"))
 
-    parser.add_argument("--train", type=str, default=os.getenv("SM_CHANNEL_TRAIN"))
+    parser.add_argument("--train", type=str, default=os.getenv("SM_CHANNEL_TRAINING"))
     parser.add_argument("--test", type=str, default=os.getenv("SM_CHANNEL_TEST"))
     parser.add_argument("--validation", type=str, default=os.getenv("SM_CHANNEL_VALIDATION"))
 
@@ -400,7 +398,8 @@ if __name__ == "__main__":
     print(f"parameters {parameters}")
     print(f'SM_CHANNEL_TRAIN {os.environ.get("SM_CHANNEL_TRAIN")}')
     print(f'SM_CHANNEL_TRAINING {os.environ.get("SM_CHANNEL_TRAINING")}')
-    train_data = fetch_dataset(data_path=parameters.get("train"))
+
+    train_data = fetch_dataset(data_path='/opt/ml/input/data/train')
 
     train(model_dir=parameters.get("model_dir"), train_data=train_data, logger=logger)
     save_fs_model(

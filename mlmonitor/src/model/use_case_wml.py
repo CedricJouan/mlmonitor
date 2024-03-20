@@ -363,6 +363,11 @@ class WMLModelUseCase(ModelUseCase):
             catalog_id=self.catalog_id,
         )
 
+        # wml_model.track(
+        #     model_usecase=muc_utilities,
+        #     approach=muc_utilities.get_approaches()[0],
+        #     version_number="minor",  # "0.1.0"
+        # )
         wml_model.track(
             usecase=muc_utilities,
             approach=muc_utilities.get_approaches()[0],

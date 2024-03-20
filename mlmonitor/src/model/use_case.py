@@ -332,6 +332,7 @@ class ModelUseCase(ABC):
         :param self: Access fields or methods of the class in python
         :return:
         """
+        provider_type = "production"
         if not self.model_endpoint:
             raise ValueError("No Model Endpoint assigned to this Object")
 

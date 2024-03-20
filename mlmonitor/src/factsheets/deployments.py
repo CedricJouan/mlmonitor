@@ -91,36 +91,45 @@ def add_aws_deployment_details(
 
     facts_client.export_facts.export_payload_manual(run_id)
 
-    # fs_model = facts_client.external_model_facts.save_external_model_asset(
-    #     model_identifier=model_data.get("ModelName"),
-    #     name=model_data.get("ModelName"),
-    #     description=description,
-    #     deployment_details=deployment,
-    # )
-
-    # muc_utilities = facts_client.assets.get_model_usecase(
-    #     model_usecase_id=model_entry_id,
-    #     catalog_id=catalog_id,
-    # )
-
-    # fs_model.track(
-    #     model_usecase=muc_utilities,
-    #     approach=muc_utilities.get_approaches()[0],
-    #     version_number="minor",  # "0.1.0"
-    # )
+    fs_model = facts_client.external_model_facts.save_external_model_asset(
+        model_identifier=model_data.get("ModelName"),
+        name=model_data.get("ModelName"),
+        description=description,
+        deployment_details=deployment,
+    )
 
     muc_utilities = facts_client.assets.get_model_usecase(
         model_usecase_id=model_entry_id,
         catalog_id=catalog_id,
     )
 
-    tracked_model = next((m for m in muc_utilities.get_tracked_models() 
-                           if m['name'] == endpoint_name), None)
+    # # untrack the current model
+    # tracked_model_info = next((m for m in muc_utilities.get_tracked_models() if m['name'] == endpoint_name), None)
+    # tracked_model = facts_client.assets.get_model(
+    #     model_id=tracked_model_info.get('id'), 
+    #     container_id=tracked_model_info.get('container_id')
+    # )
+    # tracked_model.untrack()
 
-    fs_model = facts_client.assets.get_model(
-        model_id=tracked_model.get('id'), 
-        container_id=tracked_model.get('container_id')
+    fs_model.track(
+        model_usecase=muc_utilities,
+        approach=muc_utilities.get_approaches()[0],
+        version_number="minor",  # "0.1.0"
     )
+
+    # # To add deployment to the existing model
+    # muc_utilities = facts_client.assets.get_model_usecase(
+    #     model_usecase_id=model_entry_id,
+    #     catalog_id=catalog_id,
+    # )
+
+    # tracked_model = next((m for m in muc_utilities.get_tracked_models() 
+    #                        if m['name'] == endpoint_name), None)
+
+    # fs_model = facts_client.assets.get_model(
+    #     model_id=tracked_model.get('id'), 
+    #     container_id=tracked_model.get('container_id')
+    # )
     
-    fs_model.add_deployments(deployments=[deployment.to_dict()])
+    # fs_model.add_deployments(deployments=[deployment.to_dict()])
 

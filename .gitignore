@@ -133,3 +133,5 @@ dmypy.json
 /mlruns/
 
 lab.ipynb
+credentials_uploaded2cp4d*
+mlruns

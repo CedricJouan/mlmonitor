@@ -1,0 +1,181 @@
+{
+    "serving_platform": "aws",
+    "source_dir": "use_case_gcr",
+    "model_endpoint": null,
+    "catalog_id": "9974a224-8dfd-4db8-b57b-537701403b30",
+    "model_entry_id": "b9eb0ea9-ac72-438d-ada8-8ac1f0e80851",
+    "subscription_id": null,
+    "is_trained": true,
+    "is_deployed": false,
+    "is_governed": false,
+    "is_monitored": false,
+    "__class__": "SageMakerModelUseCase",
+    "job_name": "sm-gcr-scikit-2024-03-19-19-48-17-824",
+    "ibm_key_name": "IBM_API_KEY_TESTS_SAAS",
+    "model_config": {
+        "signature": {
+            "feature_columns": [
+                "CheckingStatus",
+                "LoanDuration",
+                "CreditHistory",
+                "LoanPurpose",
+                "LoanAmount",
+                "ExistingSavings",
+                "EmploymentDuration",
+                "InstallmentPercent",
+                "Sex",
+                "OthersOnLoan",
+                "CurrentResidenceDuration",
+                "OwnsProperty",
+                "Age",
+                "InstallmentPlans",
+                "Housing",
+                "ExistingCreditsCount",
+                "Job",
+                "Dependents",
+                "Telephone",
+                "ForeignWorker"
+            ],
+            "class_label": "Risk",
+            "prediction_field": "predicted_label",
+            "probability_fields": [
+                "score"
+            ],
+            "categorical_columns": [
+                "CheckingStatus",
+                "CreditHistory",
+                "LoanPurpose",
+                "ExistingSavings",
+                "EmploymentDuration",
+                "Sex",
+                "OthersOnLoan",
+                "OwnsProperty",
+                "InstallmentPlans",
+                "Housing",
+                "Job",
+                "Telephone",
+                "ForeignWorker"
+            ],
+            "problem_type": "binary",
+            "data_type": "structured",
+            "description": "SCIKIT sagemaker model for credit risk assessment"
+        },
+        "datasets": {
+            "data_dir": "gcr",
+            "training_data": "german_credit_data_biased_training.csv",
+            "validation_data": "german_credit_data_biased_training.csv",
+            "test_data": "test_feedback_data_gcr.csv",
+            "fetch_data_module": "train_gcr",
+            "fetch_data_function": "fetch_dataset"
+        },
+        "hyperparameters": {},
+        "quality_monitor": {
+            "enabled": true,
+            "parameters": {
+                "min_feedback_data_size": 10
+            },
+            "thresholds": [
+                {
+                    "metric_id": "area_under_roc",
+                    "type": "lower_limit",
+                    "value": 0.8
+                }
+            ]
+        },
+        "fairness_monitor": {
+            "enabled": true,
+            "parameters": {
+                "features": [
+                    {
+                        "feature": "Sex",
+                        "majority": [
+                            "male"
+                        ],
+                        "minority": [
+                            "female"
+                        ],
+                        "threshold": 0.95
+                    },
+                    {
+                        "feature": "Age",
+                        "majority": [
+                            [
+                                26,
+                                100
+                            ]
+                        ],
+                        "minority": [
+                            [
+                                18,
+                                25
+                            ]
+                        ],
+                        "threshold": 0.95
+                    }
+                ],
+                "favourable_class": [
+                    0
+                ],
+                "unfavourable_class": [
+                    1
+                ],
+                "min_records": 100
+            }
+        },
+        "drift_monitor": {
+            "enabled": true,
+            "parameters": {
+                "min_samples": 100,
+                "drift_threshold": 0.1,
+                "train_drift_model": false,
+                "enable_model_drift": true,
+                "enable_data_drift": true
+            },
+            "learn_constraints": {
+                "two_column_learner_limit": 200,
+                "categorical_unique_threshold": 0.8,
+                "user_overrides": []
+            }
+        },
+        "explain_monitor": {
+            "enabled": true
+        },
+        "mrm_monitor": {
+            "enabled": true
+        },
+        "custom_monitor": {
+            "enabled": true,
+            "names": [
+                "sensitivity",
+                "specificity",
+                "gender_less40_fav_prediction_ratio"
+            ],
+            "thresholds": [
+                0.8,
+                0.6,
+                0.6
+            ],
+            "provider_name": "Custom_Metrics_Provider_gcr",
+            "custom_monitor_name": "Custom_Monitor_credit_risk",
+            "wml_function_provider": "Custom_Metrics_Provider_Deployment_gcr"
+        },
+        "source_dir": "use_case_gcr",
+        "__class__": "SageMakerModelConfig",
+        "aws_runtime": {
+            "train_script": "train_gcr.py",
+            "inference_script": "inference_aws_gcr.py",
+            "train_framework": "sklearn",
+            "train_framework_version": "1.0-1",
+            "train_py_version": "py3",
+            "inference_framework": "sklearn",
+            "inference_framework_version": "1.0-1",
+            "train_instance": "ml.m4.xlarge",
+            "inference_instance": "ml.m4.xlarge",
+            "inference_py_version": "py3",
+            "job_name": "sm-gcr-scikit",
+            "prefix": "gcr",
+            "serializer": "json",
+            "deserializer": "json"
+        }
+    }
+}
