@@ -73,7 +73,7 @@ class SageMakerModelUseCase(ModelUseCase):
 
     """
 
-    sm_secret_name = "IBM_KEYS_3PREM"
+    sm_secret_name = "IBM_KEYS_4PREM"
 
     def __init__(
         self,
