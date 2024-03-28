@@ -96,7 +96,7 @@
 	},
 	"hyperparameters": {},
 	"quality_monitor": {
-		"enabled": true,
+		"enabled": "True",
 		"parameters": {
 			"min_feedback_data_size": 10
 		},
@@ -107,7 +107,7 @@
 		}]
 	},
 	"fairness_monitor": {
-		"enabled": true,
+		"enabled": "True",
 		"parameters": {
 			"features": [{
 					"feature": "Sex",
@@ -132,13 +132,13 @@
 		}
 	},
 	"drift_monitor": {
-		"enabled": true,
+		"enabled": "True",
 		"parameters": {
 			"min_samples": 100,
 			"drift_threshold": 0.1,
 			"train_drift_model": false,
-			"enable_model_drift": true,
-			"enable_data_drift": true
+			"enable_model_drift": "True",
+			"enable_data_drift": "True"
 		},
 		"learn_constraints": {
 			"two_column_learner_limit": 200,
@@ -147,13 +147,13 @@
 		}
 	},
 	"explain_monitor": {
-		"enabled": true
+		"enabled": "True"
 	},
 	"mrm_monitor": {
-		"enabled": true
+		"enabled": "True"
 	},
 	"custom_monitor": {
-		"enabled": true,
+		"enabled": "True",
 		"names": ["sensitivity", "specificity", "gender_less40_fav_prediction_ratio"],
 		"thresholds": [0.8, 0.6, 0.6],
 		"provider_name": "Custom_Metrics_Provider_gcr",

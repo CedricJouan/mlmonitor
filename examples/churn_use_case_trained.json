@@ -2,15 +2,15 @@
     "serving_platform": "aws",
     "source_dir": "use_case_gcr",
     "model_endpoint": null,
-    "catalog_id": "9974a224-8dfd-4db8-b57b-537701403b30",
-    "model_entry_id": "b9eb0ea9-ac72-438d-ada8-8ac1f0e80851",
+    "catalog_id": "3cb124e6-40b6-4a71-aee5-9a8b4f35023e",
+    "model_entry_id": "28cae048-6ed6-46a5-a0fa-f3e8e9b45bd8",
     "subscription_id": null,
     "is_trained": true,
     "is_deployed": false,
     "is_governed": false,
     "is_monitored": false,
     "__class__": "SageMakerModelUseCase",
-    "job_name": "sm-gcr-scikit-2024-03-19-19-48-17-824",
+    "job_name": "sm-gcr-scikit-2024-03-28-15-41-38-301",
     "ibm_key_name": "IBM_API_KEY_TESTS_SAAS",
     "model_config": {
         "signature": {
@@ -70,7 +70,7 @@
         },
         "hyperparameters": {},
         "quality_monitor": {
-            "enabled": true,
+            "enabled": "True",
             "parameters": {
                 "min_feedback_data_size": 10
             },
@@ -83,7 +83,7 @@
             ]
         },
         "fairness_monitor": {
-            "enabled": true,
+            "enabled": "True",
             "parameters": {
                 "features": [
                     {
@@ -123,13 +123,13 @@
             }
         },
         "drift_monitor": {
-            "enabled": true,
+            "enabled": "True",
             "parameters": {
                 "min_samples": 100,
                 "drift_threshold": 0.1,
                 "train_drift_model": false,
-                "enable_model_drift": true,
-                "enable_data_drift": true
+                "enable_model_drift": "True",
+                "enable_data_drift": "True"
             },
             "learn_constraints": {
                 "two_column_learner_limit": 200,
@@ -138,13 +138,13 @@
             }
         },
         "explain_monitor": {
-            "enabled": true
+            "enabled": "True"
         },
         "mrm_monitor": {
-            "enabled": true
+            "enabled": "True"
         },
         "custom_monitor": {
-            "enabled": true,
+            "enabled": "True",
             "names": [
                 "sensitivity",
                 "specificity",

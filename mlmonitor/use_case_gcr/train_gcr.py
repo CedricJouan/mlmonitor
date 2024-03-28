@@ -73,7 +73,7 @@ def init_external_fs_client(logger, **params) -> tuple:
         SM_TRAINING_ENV = json.loads(os.environ["SM_TRAINING_ENV"])
         experiment_name = SM_TRAINING_ENV["job_name"]
         API_KEY = json.loads(
-            _get_secret(secret_name="IBM_KEYS_PREM", region_name=region_name)
+            _get_secret(secret_name="IBM_KEYS_3PREM", region_name=region_name)
         ).get(API_KEY_NAME)
         fs_tags = {
             "job_name": SM_TRAINING_ENV["job_name"],
@@ -192,12 +192,15 @@ def save_fs_model(
         model_usecase_id=model_entry_id,
         catalog_id=catalog_id,
     )
-
-    fs_model.track(
-        model_usecase=muc_utilities,
-        approach=muc_utilities.get_approaches()[0],
-        version_number="minor",  # "0.1.0"
-    )
+    try:
+        fs_model.track(
+            usecase=muc_utilities,
+            approach=muc_utilities.get_approaches()[0],
+            version_number="minor",  # "0.1.0"
+        )
+    except Exception as e:
+        logger.error(f"Error tracking model {e}")
+        pass
 
 
 def fetch_dataset(data_path: str, filename: str = "training.csv") -> pd.DataFrame:

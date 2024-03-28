@@ -111,13 +111,17 @@ def add_aws_deployment_details(
     # )
     # tracked_model.untrack()
 
-    fs_model.track(
-        model_usecase=muc_utilities,
-        approach=muc_utilities.get_approaches()[0],
-        version_number="minor",  # "0.1.0"
-    )
+    try:
+        fs_model.track(
+            usecase=muc_utilities,
+            approach=muc_utilities.get_approaches()[0],
+            version_number="minor",  # "0.1.0"
+        )
+    except Exception as e:
+        print(e)
+        pass
 
-    # # To add deployment to the existing model
+
     # muc_utilities = facts_client.assets.get_model_usecase(
     #     model_usecase_id=model_entry_id,
     #     catalog_id=catalog_id,
