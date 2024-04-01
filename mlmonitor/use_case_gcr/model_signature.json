@@ -113,17 +113,17 @@
 					"feature": "Sex",
 					"majority": ["male"],
 					"minority": ["female"],
-					"threshold": 0.95
+					"threshold": 0.85
 				},
 				{
 					"feature": "Age",
 					"majority": [
-						[26, 100]
+						[56, 100]
 					],
 					"minority": [
-						[18, 25]
+						[18, 55]
 					],
-					"threshold": 0.95
+					"threshold": 0.85
 				}
 			],
 			"favourable_class": [0],
