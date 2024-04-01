@@ -118,10 +118,10 @@
 				{
 					"feature": "Age",
 					"majority": [
-						[56, 100]
+						[26, 100]
 					],
 					"minority": [
-						[18, 55]
+						[18, 25]
 					],
 					"threshold": 0.85
 				}
