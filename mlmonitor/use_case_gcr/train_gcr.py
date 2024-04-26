@@ -73,7 +73,7 @@ def init_external_fs_client(logger, **params) -> tuple:
         SM_TRAINING_ENV = json.loads(os.environ["SM_TRAINING_ENV"])
         experiment_name = SM_TRAINING_ENV["job_name"]
         API_KEY = json.loads(
-            _get_secret(secret_name="IBM_KEYS_7PREM", region_name=region_name)
+            _get_secret(secret_name="IBM_KEYS_8PREM", region_name=region_name)
         ).get(API_KEY_NAME)
         fs_tags = {
             "job_name": SM_TRAINING_ENV["job_name"],
@@ -187,7 +187,6 @@ def save_fs_model(
         training_data_reference=trainingdataref,
         description="Scikit Credit Risk model",
     )
-
     muc_utilities = facts_client.assets.get_model_usecase(
         model_usecase_id=model_entry_id,
         catalog_id=catalog_id,
